@@ -180,7 +180,7 @@ void PontoMedio()
     double nEqua,nApro,nDif,nMed;
     nEqua = integral(nIni,nFim);
 
-    nMed = (nFim - nIni);
+    nMed = (nFim - nIni)/2;
     nApro = nMed * f(nMed);
 
     nDif = fabs(nEqua - nApro);
@@ -262,7 +262,7 @@ void PontoMedioComp()
 
     int nI=0;
     for(nI=1;nI<nPart;nI++){
-        nMed = (nParts[nI] - nParts[nI-1]);
+        nMed = (nParts[nI] - nParts[nI-1])/nPart;
         nApro = nApro+(f(nParts[nI]))*nMed;
     }
 
