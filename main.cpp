@@ -209,10 +209,9 @@ void Simpson1_3()
 {
     double nEqua,nApro,nDif,nMed;
     nEqua = integral(nIni,nFim);
-    double nH = (double)(nFim - nIni)/2,nC;
+    double nH = (double)(nFim - nIni)/2;
 
-    nC    = nIni+nH;
-    nApro = (nH/3)*(f(nIni) + (4*f(nC)) + f(nFim));
+    nApro = (nH/3)*(f(nIni) + (4*f(nH)) + f(nFim));
 
     nDif  = fabs(nEqua - nApro);
 
@@ -224,27 +223,15 @@ void Simpson1_3()
 void Simpson3_8()
 {
     double nEqua,nApro,nDif,nMed;
-    int nN;
     nEqua = integral(nIni,nFim);
-    // forca para multiplo de 3
-    nN = nPart;
-    if((nN % 3) == 0)
-        nN = 3*((nN/3)+1);
 
-    double nH = (double)(nFim - nIni)/nN,nC;
-    double nM = 0,nNM = 0,nX = 0;
-
-    nX = nIni + nH;
-    int nI;
-    for(nI=1;nI<nN;nI++){
-        if((nI % 3) == 0)
-            nM  = nM + f(nX);
-        else
-            nNM = nNM + f(nX);
-        nX = nX + nH;
-    }
-
-    nApro = ((nH*3)/8) * (f(nIni)+f(nFim)+(3*nM)+(2*nNM));
+    double nH = (double)(nFim - nIni);
+    double nA,nB;
+    
+    nA = ((2*nIni)+nFim)/3;
+    nB = ((2*nFim)+nIni)/3;
+    
+    nApro = ((nH*3)/8) * (f(nIni)+f(nFim)+(3*nA)+(3*nB));
     nDif = fabs(nEqua - nApro);
 
     printf("Aproximacao = %f\n",nApro);
