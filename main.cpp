@@ -180,8 +180,8 @@ void PontoMedio()
     double nEqua,nApro,nDif,nMed;
     nEqua = integral(nIni,nFim);
 
-    nMed = (nFim - nIni)/2;
-    nApro = nMed * f(nMed);
+    nMed = (nFim - nIni);
+    nApro = nMed * f((nFim + nIni)/2);
 
     nDif = fabs(nEqua - nApro);
 
@@ -231,7 +231,7 @@ void Simpson3_8()
     nA = ((2*nIni)+nFim)/3;
     nB = ((2*nFim)+nIni)/3;
     
-    nApro = ((nH*3)/8) * (f(nIni)+f(nFim)+(3*nA)+(3*nB));
+    nApro = ((nH*3)/8) * (f(nIni)+f(nFim)+(3*f(nA))+(3*f(nB)));
     nDif = fabs(nEqua - nApro);
 
     printf("Aproximacao = %f\n",nApro);
@@ -250,7 +250,7 @@ void PontoMedioComp()
     int nI=0;
     for(nI=1;nI<nPart;nI++){
         nMed = (nParts[nI] - nParts[nI-1])/nPart;
-        nApro = nApro+(f(nParts[nI]))*nMed;
+        nApro = nApro+(f( (nParts[nI] + nParts[nI-1])/2  ))*nMed;
     }
 
     nDif = fabs(nEqua - nApro);
